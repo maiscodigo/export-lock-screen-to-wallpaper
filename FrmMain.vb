@@ -1,5 +1,4 @@
 ﻿Imports System.IO
-
 Public Class FrmMain
     Private Sub FrmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Exibe um modal para seleção de diretório
@@ -8,7 +7,8 @@ Public Class FrmMain
             fbdDest.RootFolder = Environment.SpecialFolder.UserProfile
             fbdDest.ShowNewFolderButton = True
             fbdDest.ShowDialog()
-            SubGetFiles(fbdDest.SelectedPath)
+
+            If fbdDest.SelectedPath <> "" Then SubGetFiles(fbdDest.SelectedPath)
         End Using
 
         'Finaliza a aplicação
