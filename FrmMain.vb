@@ -8,6 +8,7 @@ Public Class FrmMain
             fbdDest.ShowNewFolderButton = True
             fbdDest.ShowDialog()
 
+            'Verifica se retornou algum diretório
             If fbdDest.SelectedPath <> "" Then SubGetFiles(fbdDest.SelectedPath)
         End Using
 
@@ -32,8 +33,15 @@ Public Class FrmMain
 
                 'Se a dimenção for igual ou maior que 1920 x 1080
                 If bmp.Width >= 1920 And bmp.Height >= 1080 Then
-                    'Copia para a pasta informada não sobreescrevendo caso o arquivo exista
-                    My.Computer.FileSystem.CopyFile(fi.FullName, sDest & "\" & fi.Name & ".jpg", False)
+                    Try
+                        'Copia para a pasta informada não sobreescrevendo caso o arquivo exista
+                        My.Computer.FileSystem.CopyFile(fi.FullName, sDest & "\" & fi.Name & ".jpg", True)
+                        'Remove o arquivo da fonte
+                        My.Computer.FileSystem.DeleteFile(fi.FullName)
+                    Catch ex As Exception
+                        'Caso ocorra algum erro desconhecido durante a cópia ou remoção
+                        Console.WriteLine(ex)
+                    End Try
                 End If
             End If
         Next
