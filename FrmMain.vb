@@ -36,13 +36,13 @@ Public Class FrmMain
                     Try
                         'Copia para a pasta informada não sobreescrevendo caso o arquivo exista
                         My.Computer.FileSystem.CopyFile(fi.FullName, sDest & "\" & fi.Name & ".jpg", True)
-                        'Remove o arquivo da fonte
-                        My.Computer.FileSystem.DeleteFile(fi.FullName)
                     Catch ex As Exception
                         'Caso ocorra algum erro desconhecido durante a cópia ou remoção
                         Console.WriteLine(ex)
                     End Try
                 End If
+
+                'My.Computer.FileSystem.DeleteFile(fi.FullName)
             End If
         Next
     End Sub
